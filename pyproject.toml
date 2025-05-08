@@ -1,71 +1,19 @@
-## The `project` section
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
 
-The `project` section contains information about the Python package.
-The `name` and `version` are required fields, the other fields are optional.
-However, it is recommended to provide as much information as possible about your package.
-Let's take a look at certain parts of the [`pyproject.toml` file](https://github.com/numpy/numpy/blob/main/pyproject.toml) of the `numpy` package:
 
-```toml
 [project]
-name = "numpy"
-version = "2.0.0.dev0"
+name = "mypackage"
+version = "0.1.0"
+description = "My first package"
 license = {file = "LICENSE.txt"}
+dependencies = [
+"numpy",]
 
-description = "Fundamental package for array computing in Python"
-authors = [{name = "Travis E. Oliphant et al."}]
-maintainers = [
-    {name = "NumPy Developers", email="numpy-discussion@python.org"},
+[project.optional-dependencies]
+dev = [
+"bumpver",
+"pytest",
+"pytest-cov",
 ]
-requires-python = ">=3.9"
-readme = "README.md"
-classifiers = [
-    'Development Status :: 5 - Production/Stable',
-    'Intended Audience :: Science/Research',
-    'Intended Audience :: Developers',
-    'License :: OSI Approved :: BSD License',
-    'Programming Language :: C',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.9',
-    'Programming Language :: Python :: 3.10',
-    'Programming Language :: Python :: 3.11',
-    'Programming Language :: Python :: 3.12',
-    'Programming Language :: Python :: 3 :: Only',
-    'Programming Language :: Python :: Implementation :: CPython',
-    'Topic :: Software Development',
-    'Topic :: Scientific/Engineering',
-    'Typing :: Typed',
-    'Operating System :: Microsoft :: Windows',
-    'Operating System :: POSIX',
-    'Operating System :: Unix',
-    'Operating System :: MacOS',
-]
-
-[project.urls]
-homepage = "https://numpy.org"
-documentation = "https://numpy.org/doc/"
-source = "https://github.com/numpy/numpy"
-download = "https://pypi.org/project/numpy/#files"
-tracker = "https://github.com/numpy/numpy/issues"
-"release notes" = "https://numpy.org/doc/stable/release"
-
-```
-
-Here is what each field means:
-
-
-| Key          | Type      | Description |
-|--------------|-----------|------------|
-| `name`       | string    | The name of the package. |
-| `version`    | string    | The version of the package. |
-| `description`| string    | A short description of the package. |
-| `license`    | table     | Path to the license file relative to the `pyproject.toml` file. One can also provide the content of the license in the `text` field: `license = {text = "BSD 3-Clause License"}`. Keep in mind that the `file` and `text` fields are mutually exclusive.|
-| `authors` [1]    | array of tables     | A list of authors. Each author is a table with `name` and `email` keys. The `name` key is a string that contains the name of the author or maintainer. The `email` key is a string that contains the email address of the author or maintainer.  One can provide either both keys of only one of them.|
-| `maintainers` [1]    | array of tables     | Same as for `authors`.|
-| `requires-python` | string | The Python version required to run the package. |
-| `readme` | string or table | The path to the readme file relative to the `pyproject.toml` file. One can also provide the content of the readme file in the `text` field. Finally, one can provide a table with `file` and `content-type` keys.|
-| `classifiers` | array of strings | A list of [trove classifiers](https://pypi.org/classifiers/). These classifiers are used to categorize the package. Make sure to provide as complete list of classifiers as possible.|
-| `urls` | table | A table of URLs. The key is the URL label and the value is the URL itself.|
-
-
-[1] Accordnig to the [official documentation](https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#authors-maintainers) the meaning of these fileds is open to interpretation.
